@@ -46,7 +46,15 @@ Included resources
     html2text  0.2     https://github.com/soundasleep/html2text
     ========== ======= ========================================
 
+Repository, bug tracker, etc.
+-----------------------------
+
+Code repository, bug tracker, and related tools can be found on GitHub_.
+
+
 .. _Zurb Ink: http://zurb.com/ink/
 .. _Direct Mail: http://typo3.org/extensions/repository/view/direct_mail
 .. _Emogrifier: https://github.com/jjriv/emogrifier
 .. _html2text: https://github.com/soundasleep/html2text
+.. _GitHub: https://github.com/cbrunet/typo3-cb_ink
+
