@@ -1,0 +1,18 @@
+plugin.tx_cbink {
+	# cat=ink/file; type=string; label=Name of HTML template
+	htmlTemplate = Newsletter.html
+	# cat=ink/file; type=string; label=Name of plain text template
+	plainText = Newsletter.html
+
+	view {
+		# cat=ink/file; type=string; label=Path to template root
+		templateRootPath = EXT:cb_ink/Resources/Private/Templates/
+		# cat=ink/file; type=string; label=Path to template partials
+		partialRootPath = EXT:cb_ink/Resources/Private/Partials/
+		# cat=ink/file; type=string; label=Path to template layouts
+		layoutRootPath = EXT:cb_ink/Resources/Private/Layouts/
+	}
+
+	# cat=ink/links; type=string; label=Absolute URL for links
+	siteURL = /
+}

@@ -1,0 +1,105 @@
+
+tx_cbink_html = PAGE
+tx_cbink_html {
+	typeNum = 98
+	includeCSS.ink = EXT:cb_ink/Resources/Public/Css/ink.css
+	# meta.viewport = width=device-width
+
+	config {
+		disableAllHeaderCode = 1
+		absRefPrefix = {$plugin.tx_cbink.siteURL}
+	}
+
+	10 = FLUIDTEMPLATE
+	10 {
+		template = FILE
+		template.file = {$plugin.tx_cbink.view.templateRootPath}{$plugin.tx_cbink.htmlTemplate}
+		layoutRootPath = {$plugin.tx_cbink.view.layoutRootPath}
+		partialRootPath = {$plugin.tx_cbink.view.partialRootPath}
+		
+		variables {
+			content < styles.content.get
+			content.select.where = colPos = 0 
+
+			left < styles.content.get
+			left.select.where = colPos = 1
+
+			right < styles.content.get
+			right.select.where = colPos = 2
+
+			border < styles.content.get
+			border.select.where = colPos = 3
+
+			inkCSS = FILE
+			inkCSS.file = EXT:cb_ink/Resources/Public/Css/ink.css
+		}
+
+		stdWrap.postUserFunc = \Cbrunet\CbInk\User\user_EmailProcessor->inliner
+	}
+}
+
+
+tx_cbink_plaintext < tx_cbink_html
+tx_cbink_plaintext {
+	typeNum = 99
+
+	config {
+		additionalHeaders = Content-type:text/plain
+	}
+
+	10 {
+		template.file = {$plugin.tx_cbink.view.templateRootPath}{$plugin.tx_cbink.plainText}
+
+		stdWrap.postUserFunc = \Cbrunet\CbInk\User\user_EmailProcessor->html2text
+		stdWrap.postUserFunc {
+			ignoreTags = style,head,title,meta,script
+			blockElements = address,article,aside,audio,blockquote,canvas,dd,div,dl,fieldset,figcaption,figure,footer,form,h1,h2,h3,h4,h5,h6,header,hgroup,hr,noscript,ol,output,p,pre,section,table,tfoot,ul,video
+
+			h1.case = upper
+			h1.strPad {
+				length = 71
+				type = both
+			}
+			h1.noTrimWrap (
+|
+***************************************************************************
+* | *
+***************************************************************************
+|
+)
+			
+			h2.case = upper
+			h2.noTrimWrap (
+|===========================================================================
+|
+===========================================================================|
+)
+			h3.noTrimWrap (
+||
+---------------------------------------------------------------------------|
+)
+			h4.noTrimWrap (
+||
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~|
+)
+
+			li.trim = 1
+			li.noTrimWrap (
+| * |
+|
+)
+
+			a.attributes = href
+			a.dataWrap = [|]({register: href})
+
+			img.attributes = src, alt, title
+			img.data = register: alt
+			img.wrap = [image: |]
+			img.required = 1
+
+			hr.wrap = ---------------------------------------------------------------------------|
+		}
+	}
+
+	stdWrap.postUserFunc < tt_content.stdWrap.postUserFunc
+}
