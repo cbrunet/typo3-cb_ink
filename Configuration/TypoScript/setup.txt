@@ -103,3 +103,5 @@ tx_cbink_plaintext {
 
 	stdWrap.postUserFunc < tt_content.stdWrap.postUserFunc
 }
+
+lib.parseFunc_RTE.externalBlocks.table.stdWrap.HTMLparser.tags.table.fixAttrib.class.list = container,row,wrapper,columns,column,sub-columns,sub-column,one,two,three,four,five,six,seven,eight,nine,ten,eleven,twelve,center,button,tiny-button,small-button,medium-button,large-button,secondary,success,alert,radius,round
