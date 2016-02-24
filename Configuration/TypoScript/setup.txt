@@ -34,7 +34,7 @@ tx_cbink_html {
 			inkCSS.file = EXT:cb_ink/Resources/Public/Css/ink.css
 		}
 
-		stdWrap.postUserFunc = \Cbrunet\CbInk\User\user_EmailProcessor->inliner
+		stdWrap.postUserFunc = Cbrunet\CbInk\User\user_EmailProcessor->inliner
 	}
 }
 
@@ -50,7 +50,7 @@ tx_cbink_plaintext {
 	10 {
 		template.file = {$plugin.tx_cbink.view.templateRootPath}{$plugin.tx_cbink.plainText}
 
-		stdWrap.postUserFunc = \Cbrunet\CbInk\User\user_EmailProcessor->html2text
+		stdWrap.postUserFunc = Cbrunet\CbInk\User\user_EmailProcessor->html2text
 		stdWrap.postUserFunc {
 			ignoreTags = style,head,title,meta,script
 			blockElements = address,article,aside,audio,blockquote,canvas,dd,div,dl,fieldset,figcaption,figure,footer,form,h1,h2,h3,h4,h5,h6,header,hgroup,hr,noscript,ol,output,p,pre,section,table,tfoot,ul,video
