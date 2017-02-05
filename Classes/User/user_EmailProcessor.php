@@ -21,7 +21,6 @@ class user_EmailProcessor {
 	 * Based on https://github.com/soundasleep/html2text
 	 */
 	public function html2text($content, $conf) {
-
 		if (isset($conf['ignoreTags'])) {
 			$this->ignoreTags = preg_split('/\s*,\s*/', $conf['ignoreTags']);
 		}
@@ -30,12 +29,16 @@ class user_EmailProcessor {
 			$this->blockElements = preg_split('/\s*,\s*/', $conf['blockElements']);
 		}
 
+        if (mb_detect_encoding($content, "UTF-8", true)) {
+            $content = mb_convert_encoding($content, "HTML-ENTITIES", "UTF-8");
+        }
 		// replace \r\n to \n
-		$content = str_replace("\r\n", "\n", $content);
+		$content .= str_replace("\r\n", "\n", $content);
 		// remove \rs
 		$content = str_replace("\r", "\n", $content);
 
 		$doc = new \DOMDocument();
+
 		libxml_use_internal_errors(true);  // ignore html5 errors
 		if (!$doc->loadHTML($content)) {
 			// throw new Html2TextException("Could not load HTML - badly formed?", $html);
