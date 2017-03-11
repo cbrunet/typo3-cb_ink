@@ -1,0 +1,12 @@
+{
+    "name": "cbrunet/cb-ink",
+    "type": "typo3-cms-extension",
+    "license": "GPL2+",
+    "authors": [
+        {
+            "name": "Charles Brunet",
+            "email": "charles@cbrunet.net"
+        }
+    ],
+    "require": {}
+}
