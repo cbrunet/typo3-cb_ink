@@ -104,6 +104,7 @@ class user_EmailProcessor {
 			return "";
 		}
 
+		$output = '';
 		if (isset($node->childNodes)) {
 			for ($i = 0; $i < $node->childNodes->length; $i++) {
 				$n = $node->childNodes->item($i);
@@ -115,7 +116,7 @@ class user_EmailProcessor {
 			if (isset($tags[$name.'.']['attributes'])) {
 				$attributes = preg_split('/\s*,\s*/', $tags[$name.'.']['attributes']);
 				foreach ($attributes as $attr) {
-					$this->cObj->LOAD_REGISTER(array($attr=>$node->getAttribute($attr)), 'LOAD_REGISTER');
+					$this->cObj->cObjGetSingle('LOAD_REGISTER', array($attr=>$node->getAttribute($attr)));
 				}
 			}
 			else {
@@ -125,7 +126,7 @@ class user_EmailProcessor {
 			$output = $this->cObj->stdWrap($output, $tags[$name.'.']);
 
 			foreach($attributes as $attr) {
-				$this->cObj->LOAD_REGISTER(array(), 'RESTORE_REGISTER');
+				$this->cObj->cObjGetSingle('RESTORE_REGISTER', array());
 			}
 		}
 
